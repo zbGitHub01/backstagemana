@@ -35,9 +35,6 @@ class LeftNav extends Component {
       })
     }
 
-    
-
-
     state = {
         theme: 'dark',
         current: '1',

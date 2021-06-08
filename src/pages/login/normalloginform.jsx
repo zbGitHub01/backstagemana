@@ -1,4 +1,4 @@
-import {Route, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {reqLogin } from '../../api/index'
@@ -101,9 +101,9 @@ return (
                 <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
-                <a className="login-form-forgot" href="">
+                {/* <a className="login-form-forgot" href="">
                 Forgot password
-                </a>
+                </a> */}
             </Form.Item>
 
             <Form.Item>

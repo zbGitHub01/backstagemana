@@ -12,7 +12,7 @@ const menuList = [
     },
     {
         title: '商品', 
-        key: '/categorymana', 
+        key: '/categorymanaa', 
         icon: <AppstoreOutlined /> ,
         children: [
             {
