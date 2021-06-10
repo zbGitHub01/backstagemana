@@ -137,12 +137,12 @@ export default class Categorymana extends Component {
         return (
             <Card title={title} extra={<a href="#">{extra}</a>} style={{ width: '100%' }}>
                 <Table 
-                dataSource={parentId=='0'? categorys : childCategorys} 
-                columns={this.columns} 
-                bordered 
-                rowKey='_id'
-                loading={loading}
-                pagination={{defaultPageSize:6,showQuickJumper:true}}
+                    dataSource={parentId=='0'? categorys : childCategorys} 
+                    columns={this.columns} 
+                    bordered 
+                    rowKey='_id'
+                    loading={loading}
+                    pagination={{defaultPageSize:6,showQuickJumper:true}}
                 />
             </Card>
         )

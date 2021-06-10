@@ -25,6 +25,15 @@ export const addCategorys = (parentId,categoryName) =>ajax (BASE + '/manage/cate
 
 //更新分类
 export const updateCategorys = ({categoryId,categoryName}) =>ajax (BASE + '/manage/category/add',{categoryId,categoryName},'POST')
+
+
+
+//获取所有角色的列表
+export const reqRoles = () => ajax(BASE +'/manage/role/list' )
+
+
+
+
 /**
  * jsonp请求的接口函数
  * 
