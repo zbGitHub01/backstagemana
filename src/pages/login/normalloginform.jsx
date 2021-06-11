@@ -9,7 +9,7 @@ const NormalLoginForm = (props) =>{
                 
     const onFinish = async(values) => {                         
     console.log('Received values of form: ', values);
-    props.history.replace('/')
+  
     
     //this.props.route.history.push('/')
 //     if(true){

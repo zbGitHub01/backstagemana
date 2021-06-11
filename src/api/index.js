@@ -31,7 +31,8 @@ export const updateCategorys = ({categoryId,categoryName}) =>ajax (BASE + '/mana
 //获取所有角色的列表
 export const reqRoles = () => ajax(BASE +'/manage/role/list' )
 
-
+//添加角色
+export const addRoles = (rolename) => ajax(BASE + '/manage/role/add' + {rolename}, 'POST')
 
 
 /**

@@ -1,6 +1,6 @@
-import { Button ,Table ,Card ,Modal} from 'antd'
+import { Button ,Table ,Card ,Modal, message} from 'antd'
 import React, { Component } from 'react'
-import { reqRoles } from '../../api'
+import { addRoles, reqRoles } from '../../api'
 import {PAGE_SIZE} from '../../utils/constant' 
 import Addform from './add-form'
 export default class Role extends Component {
@@ -49,8 +49,6 @@ export default class Role extends Component {
             }
         }
 
- 
-
 
     
     //异步请求获取 角色列表
@@ -65,6 +63,38 @@ export default class Role extends Component {
         
     }
     
+    //添加角色
+    addRoles = () => {
+        this.setState({isShow: false })
+
+       }
+    
+    //  this.props.getFinish(async(values) =>{
+    //         if(values){
+    //             //收集数据
+    //             const {roleName} = values
+    //             const result = await addRoles(roleName)
+    //             if(result.status === 0){
+    //                 message.success('添加成功！')
+    //                 this.setState(state =>({
+    //                     roles : [...state.roles,result.data]
+    //                 }))
+                    
+    //             }
+    //         } else {
+    //             message.error('错误')
+    //         }
+    //     }
+
+    // )
+    
+    
+
+
+    
+    setForm = values =>{
+        console.log(values)
+    }
 
     //发送异步请求数据
     componentDidMount(){
@@ -77,9 +107,33 @@ export default class Role extends Component {
         this.initColumns()
     }
 
+     //将子组件传递的onFinish方法放在state
+     onSubmit = (onFinish) => {  
+        this.setState({
+            onFinish
+        })
+    }
+
+    getSubmitReq= async() =>{
+        const formData = this.userFormRef.current.formRef.current.getFieldsValue()
+        const result = await addRoles(formData)
+        if (result.status === 0 ) {
+            message.success('success')
+            this.setState(state=>({
+                roles: [...state.roles,result.data]
+            })
+           
+             ) }
+
+    }
 
 
-    render() {           
+    render() {       
+        
+        this.userFormRef = React.createRef()
+
+        
+
         const { roles,role,isShow} = this.state
         const title = (
             <span>
@@ -103,9 +157,15 @@ export default class Role extends Component {
                 <Modal 
                     title="角色创建" 
                     visible={isShow} 
-                    // onOk={handleOk} 
+                    onOk={this.getSubmitReq} 
                     onCancel={()=>{this.setState({isShow: false})}}>
-                    <Addform setForm={form => this.props = form} />
+                    <Addform 
+                    ref={this.userFormRef} onSubmit={this.onSubmit}
+                    getSubmitReq={this.getSubmitReq}
+                 
+                    
+                    // getFinish={onFinish => this.props =onFinish} 
+                    />
                 </Modal>
 
             </Card>
