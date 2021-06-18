@@ -9,8 +9,7 @@ const NormalLoginForm = (props) =>{
                 
     const onFinish = async(values) => {                         
     console.log('Received values of form: ', values);
-  
-    
+   
     //this.props.route.history.push('/')
 //     if(true){
 //         //请求登陆

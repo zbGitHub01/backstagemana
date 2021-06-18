@@ -12,18 +12,18 @@ export default class Addform extends Component {
         setForm: PropTypes.func.isRequired //传递form对象的函数
     } 
 
-    componentWillMount(){
+    componentDidMount(){
         this.props.onSubmit(this.onFinish)
     }
 
     formRef = React.createRef();
-    onFinish=()=>{
+    
+    onFinish = ()=>{
         this.props.getSubmitReq()
+        //console.log('sss')
     }
     render() {
-
-        
-      
+   
 
         const formItemLayout = {
             labelCol: {span: 4},
@@ -35,12 +35,13 @@ export default class Addform extends Component {
             //  onFinish={this.props.getFinish(this.props.onFinish)}
              >
                 <Form.Item 
-                name= 'rolName'
+                name= 'roleName'
                 {...formItemLayout}
                 label='角色名称：'
+                initialValue={''}
                 rules={[{ required:true, message: '角色名必须输入！' ,}]}
                 >
-                    <input placeholder='请输入角色名称！'/>
+                    <input  placeholder='请输入角色名称！'/>
                 </Form.Item>
             </Form>
         )

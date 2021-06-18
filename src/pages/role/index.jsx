@@ -1,5 +1,6 @@
 import { Button ,Table ,Card ,Modal, message} from 'antd'
 import React, { Component } from 'react'
+import axios from 'axios'
 import { addRoles, reqRoles } from '../../api'
 import {PAGE_SIZE} from '../../utils/constant' 
 import Addform from './add-form'
@@ -64,10 +65,10 @@ export default class Role extends Component {
     }
     
     //添加角色
-    addRoles = () => {
-        this.setState({isShow: false })
+    // addRoles = () => {
+    //     this.setState({isShow: false })
 
-       }
+    //    }
     
     //  this.props.getFinish(async(values) =>{
     //         if(values){
@@ -87,10 +88,7 @@ export default class Role extends Component {
     //     }
 
     // )
-    
-    
-
-
+      
     
     setForm = values =>{
         console.log(values)
@@ -114,26 +112,45 @@ export default class Role extends Component {
         })
     }
 
-    getSubmitReq= async() =>{
-        const formData = this.userFormRef.current.formRef.current.getFieldsValue()
-        const result = await addRoles(formData)
-        if (result.status === 0 ) {
-            message.success('success')
-            this.setState(state=>({
-                roles: [...state.roles,result.data]
-            })
-           
-             ) }
-
+    comformAddUser = () => {
+        this.userFormRef.current.formRef.current.submit()
+     
     }
+
+    getSubmitReq =  () => {     
+        const val = this.userFormRef.current.formRef.current.getFieldsValue()        
+             const {roleName} = val 
+             console.log(roleName)
+             this.userFormRef.current.formRef.current.resetFields()
+             axios.post(`/manage/role/add`, {roleName: roleName}).then(res=>{
+                console.log(res.data)
+                this.setState({isShow:false})
+                this.getRolesData()                           
+            })
+             
+            
+        }
+
+        //     const result = await addRoles(rolename)              
+        //     if(result.status===0){
+        //         this.setState({isShow:false}) 
+        //   } 
+        //   this.getRolesData()
+        
+        // const rolename = this.userFormRef.current.formRef.current.getFieldsValue()
+       
+        // if (result.status === 0 ) {
+        //     message.success('success')
+        //     this.setState(state=>({
+        //         roles: [...state.roles,result.data] })
+           
+        //      ) }
+    
 
 
     render() {       
         
         this.userFormRef = React.createRef()
-
-        
-
         const { roles,role,isShow} = this.state
         const title = (
             <span>
@@ -152,18 +169,17 @@ export default class Role extends Component {
                 pagination={{defaultPageSize: PAGE_SIZE}}
                 rowSelection={{type: 'radio' , selectedRowKeys : [role._id]}}
                 onRow = {this.onRow}
+
                 />
 
                 <Modal 
                     title="角色创建" 
                     visible={isShow} 
-                    onOk={this.getSubmitReq} 
+                    onOk={this.comformAddUser} 
                     onCancel={()=>{this.setState({isShow: false})}}>
                     <Addform 
                     ref={this.userFormRef} onSubmit={this.onSubmit}
-                    getSubmitReq={this.getSubmitReq}
-                 
-                    
+                    getSubmitReq={this.getSubmitReq}                                   
                     // getFinish={onFinish => this.props =onFinish} 
                     />
                 </Modal>

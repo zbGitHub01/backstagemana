@@ -32,7 +32,7 @@ export const updateCategorys = ({categoryId,categoryName}) =>ajax (BASE + '/mana
 export const reqRoles = () => ajax(BASE +'/manage/role/list' )
 
 //添加角色
-export const addRoles = (rolename) => ajax(BASE + '/manage/role/add' + {rolename}, 'POST')
+export const addRoles = (roleName) => ajax(BASE + '/manage/role/add' + {roleName}, 'POST')
 
 
 /**
