@@ -4,41 +4,47 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {reqLogin } from '../../api/index'
 import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
+import axios from 'axios';
 
-const NormalLoginForm = (props) =>{   
-                
-    const onFinish = async(values) => {                         
-    console.log('Received values of form: ', values);
-   
-    //this.props.route.history.push('/')
-//     if(true){
-//         //请求登陆
-//         const {username,password} = values
-//         reqLogin(username,password).then(resp=>{
-//             console.log(resp.data)
-//         }).catch(error=>{
-//             console.log(error)
-//         })
-//     }        
-        const {username,password} = values
+const NormalLoginForm = (props) =>{              
+    const onFinish = (values) => {  
+        console.log(props)             
+    // console.log('Received values of form: ', values);
+     
+         const {username,password} = values
     
-        const result = await reqLogin(username,password)
-        // this.props.history.push('/')
-        //console.log('请求成功',reponse.data)
-        // const result = reponse.data
-        if(result.status===0){
-            message.success('登陆成功')
-            console.log('这是 history',props.history)   
-            //保存user
-            const user = result.data
-            memoryUtils.user = user //保存在内存
-            storageUtils.saveUser(user) //保存在local中
-            
-            props.history.replace('/')
-                         
-        }else{
-            message.error(result.msg)
-        }
+        axios.post(`/login`,{username,password}).then(res=>{
+            console.log(res)
+            if(res.data.status===0){
+                message.success('登陆成功')
+                 //保存user
+                const user = res.data.data
+                memoryUtils.user = user //保存在内存
+                storageUtils.saveUser(user) //保存在local中              
+                
+                props.history.replace('/')  
+            }else{
+                message.error(res.data.msg)
+            }
+        })
+       
+    // const result = await reqLogin(username,password)
+    // // this.props.history.push('/')
+    // //console.log('请求成功',reponse.data)
+    // // const result = reponse.data
+    // if(result.status===0){
+    //     message.success('登陆成功')
+    //     console.log('这是 history',props.history)   
+    //     //保存user
+    //     const user = result.data
+    //     memoryUtils.user = user //保存在内存
+    //     storageUtils.saveUser(user) //保存在local中
+        
+    //     props.history.replace('/')
+                     
+    // }else{
+    //     message.error(result.msg)
+    // }
 
 }
 
@@ -68,7 +74,7 @@ return (
                 initialValues={{
                     remember: true,
                   }}                
-                onFinish={onFinish.bind(this)}
+                onFinish={onFinish}
                 onSubmit={handleSubmit}                        
                 >
             <Form.Item

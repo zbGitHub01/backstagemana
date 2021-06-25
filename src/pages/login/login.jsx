@@ -23,7 +23,7 @@ export default class Login extends Component{
             <div className='login'>
                <header className='login-header'>
                    <img src={logo} alt='logo'></img>
-                   <h1>封神管理平台</h1>
+                   <h1>BackStageMana</h1>
                </header>
                <section className='login-content'>
                    <h2>用户登陆</h2>

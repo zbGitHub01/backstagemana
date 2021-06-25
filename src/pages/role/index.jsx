@@ -1,3 +1,4 @@
+
 import { Button ,Table ,Card ,Modal, message} from 'antd'
 import React, { Component } from 'react'
 import axios from 'axios'
@@ -13,6 +14,7 @@ export default class Role extends Component {
     }
     
     initColumns = () =>{
+  
         this.columns = [
             {
               title: '角色名称',
@@ -87,8 +89,7 @@ export default class Role extends Component {
     //         }
     //     }
 
-    // )
-      
+    // )   
     
     setForm = values =>{
         console.log(values)

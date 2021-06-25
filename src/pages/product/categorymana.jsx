@@ -35,8 +35,8 @@ export default class Categorymana extends Component {
                           //防止一渲染就调用
                       }
 
-                    {this.state.parentId ==='0'? <LinkButton 
-                    onClick={() => {this.showChildCategorys(category)}}>查看子分类
+                    {this.state.parentId ==='0'? 
+                    <LinkButton onClick={() => {this.showChildCategorys(category)}}>查看子分类
                     </LinkButton>:null}
                       
                   </span>
